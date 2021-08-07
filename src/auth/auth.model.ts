@@ -1,11 +1,11 @@
 import { prop } from '@typegoose/typegoose';
-import { Base, TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
+import { TimeStamps, Base } from '@typegoose/typegoose/lib/defaultClasses';
 
-export interface AuthModel extends Base {} // lifehack for AuthModel extends Base too
+export interface AuthModel extends Base { }
 export class AuthModel extends TimeStamps {
-    @prop({ unique: true }) // unique - поле должно быть уникальным
-    email: string;
+	@prop({ unique: true })
+	email: string;
 
-    @prop()
-    passwordHash: string;
+	@prop()
+	passwordHash: string;
 }

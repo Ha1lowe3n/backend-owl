@@ -10,8 +10,8 @@ import {
 } from '@nestjs/common';
 
 import { CreateReviewDto } from './dto/create-review.dto';
-import { ReviewService } from './review.service';
 import { REVIEW_NOT_FOUND } from './review.constants';
+import { ReviewService } from './review.service';
 
 @Controller('review')
 export class ReviewController {
@@ -33,10 +33,5 @@ export class ReviewController {
     @Get('byProduct/:productId')
     async getByProduct(@Param('productId') productId: string) {
         return this.reviewService.findByProductId(productId);
-    }
-
-    @Delete('byProduct/:productId')
-    async deleteByProduct(@Param('productId') productId: string) {
-        return this.reviewService.deleteByProductId(productId);
     }
 }

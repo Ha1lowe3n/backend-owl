@@ -3,8 +3,8 @@ import { ModelType, DocumentType } from '@typegoose/typegoose/lib/types';
 import { Types } from 'mongoose';
 import { InjectModel } from 'nestjs-typegoose';
 
-import { ReviewModel } from './review.model';
 import { CreateReviewDto } from './dto/create-review.dto';
+import { ReviewModel } from './review.model';
 
 @Injectable()
 export class ReviewService {
@@ -14,24 +14,18 @@ export class ReviewService {
     ) {}
 
     async create(dto: CreateReviewDto): Promise<DocumentType<ReviewModel>> {
-        return await this.reviewModel.create(dto);
+        return this.reviewModel.create(dto);
     }
 
     async delete(id: string): Promise<DocumentType<ReviewModel> | null> {
-        return await this.reviewModel.findByIdAndDelete(id).exec();
+        return this.reviewModel.findByIdAndDelete(id).exec();
     }
 
     async findByProductId(
         productId: string,
     ): Promise<DocumentType<ReviewModel>[]> {
-        return await this.reviewModel
+        return this.reviewModel
             .find({ productId: Types.ObjectId(productId) })
-            .exec();
-    }
-
-    async deleteByProductId(productId: string) {
-        return await this.reviewModel
-            .deleteMany({ productId: Types.ObjectId(productId) })
             .exec();
     }
 }
